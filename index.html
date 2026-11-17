@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Password Manager</title>
+</head>
+<body>
+<header><strong>Password Manager</strong><button class="ghost" id="lock" hidden type="button">Lock vault</button></header>
+<main>
+<h1>Your passwords, one vault.</h1>
+<p class="lead" id="state">Create a vault to get started.</p>
+
+<div class="card" id="setup" hidden>
+  <h2>Create your vault</h2><small>Pick a master password you can remember. It can’t be recovered.</small>
+  <form id="fSetup">
+    <label for="m1">Master password</label><input id="m1" type="password" autocomplete="new-password" minlength="8" required>
+    <label for="m2">Confirm master password</label><input id="m2" type="password" autocomplete="new-password" required>
+    <button type="submit">Create vault</button><p class="msg" id="mSetup" role="status"></p>
+  </form>
+</div>
+
+<div class="card" id="unlock" hidden>
+  <h2>Unlock your vault</h2>
+  <form id="fUnlock">
+    <label for="mu">Master password</label><input id="mu" type="password" autocomplete="current-password" required>
+    <button type="submit">Unlock vault</button><p class="msg" id="mUnlock" role="status"></p>
+  </form>
+</div>
+
+<div class="card" id="vault" hidden>
+  <h2>Your vault</h2><p class="msg" id="mVault" role="status"></p>
+  <section>
+    <h3>Add a login</h3>
+    <form id="fAdd">
+      <label for="aN">Account name</label><input id="aN" placeholder="For example, Gmail" autocomplete="off" required>
+      <label for="aP">Password</label><input id="aP" type="password" maxlength="64" autocomplete="new-password" required>
+      <button type="submit">Save password</button>
+    </form>
+  </section>
+  <section>
+    <h3>Retrieve a login</h3>
+    <form id="fGet">
+      <label for="gN">Account name</label><input id="gN" placeholder="For example, Gmail" autocomplete="off" required>
+      <button type="submit">Retrieve password</button>
+    </form>
+    <div class="row" id="result" hidden>
+      <input id="rP" type="password" readonly aria-label="Retrieved password">
+      <button class="sm" id="show" type="button">Show</button><button class="sm" id="copy" type="button">Copy</button>
+    </div>
+  </section>
+  <section>
+    <h3>Remove a login</h3>
+    <form id="fDel">
+      <label for="dN">Account name</label><input id="dN" placeholder="For example, Gmail" autocomplete="off" required>
+      <button type="submit">Remove login</button>
+    </form>
+  </section>
+  <section>
+    <h3>Export vault</h3><small>The export is encrypted. Only your master password opens it.</small>
+    <button id="export" type="button">Export vault</button>
+    <textarea id="dump" readonly hidden aria-label="Encrypted vault export"></textarea>
+  </section>
+</div>
+</main>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
